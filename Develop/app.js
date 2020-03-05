@@ -45,7 +45,62 @@ function createManager() {
     });
 }
 
-createManager();
+function createTeam() {
+    
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "teamMember",
+            message: "Which type of team member would you like to add?",
+            choices: [
+                "Engineer",
+                "Intern",
+                "I dont want to add any more team members"
+            ]
+        }
+    ]).then(userSelection => {
+        switch(userSelection.teamMember) {
+        case "Engineer":
+            addEngineer();
+            break;
+        case "Intern":
+            addIntern();
+            break;
+        default:
+            buildTeam();
+        }
+    });
+}
+
+function addEngineer() {
+    inquirer.prompt([
+        {
+          type: "list",
+          name: "engineerName",
+          message: "What is your engineer's name?"  
+        },
+        {
+            type: "input",
+            name: "engineerId",
+            message: "what is your engineer's id?"
+        },
+        {
+            type: "input",
+            name: "engineerEmail",
+            message: "what is your engineer's email?"
+        },
+        {
+            type: "input",
+            name: "github",
+            message: "what is your engineers GitHub username?"
+        }
+    ]).then(data => {
+        const engineer = new Engineer(data.engineerName, data.engineerId, data.engineerEmail, data.github);
+        teamMembers.push(engineer);
+        idArray.push(data.engineerId);
+        createTeam();
+    });
+}
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 // After the user has input all employees desired, call the `render` function (required
