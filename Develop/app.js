@@ -101,6 +101,35 @@ function addEngineer() {
         createTeam();
     });
 }
+
+function addIntern() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "internName",
+            message: "what is your intern's name?"
+        },
+        {
+            type: "input",
+            name: "internId",
+            message: "what is your intern's id?"
+        },
+        {
+            type: "input",
+            name: "internEmail",
+            message: "what is your intern's email?"
+        },
+        {
+            type: "input",
+            name: "internSchool",
+            message: "where did your intern go to school?"
+        }
+    ]).then(data => {
+        const intern = new Intern (data.internName, data.internId, data.internEmail, data.internSchool);
+        teamMembers.push(intern);
+        idArray.push(data.internId);
+    })
+}
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 // After the user has input all employees desired, call the `render` function (required
