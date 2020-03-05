@@ -14,7 +14,40 @@ const teamMembers = [];
 const idArray = [];
 ​
 // Write code to use inquirer to gather information about the development team members,
+function createManager() {
+    console.log("Please build your team");
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "managerName",
+            message: "What is your manager's name?",
+        },
+        {
+            type: "input",
+            name: "managerId",
+            message: "What is your manager's id?",
+        },
+        {
+            type: "input",
+            name: "managerEmail",
+            message: "What is your manager's email?",
+        },
+        {
+            type: "input",
+            name: "officeNumber",
+            message: "What is your manager's office number?"
+        }
+    ]).then(data => {
+        const manager = new Manager(data.managerName, data.managerId, data.managerEmail, data.officeNumber);
+        teamMembers.push(manager);
+        idArray.push(data.managerId);
+        createTeam();
+    });
+}
+
+createManager();
 // and to create objects for each team member (using the correct classes as blueprints!)
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
